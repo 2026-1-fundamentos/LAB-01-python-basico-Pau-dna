@@ -7,20 +7,11 @@ utilizar pandas, numpy o scipy.
 
 
 def pregunta_09():
-    """
-    Retorne un diccionario que contenga la cantidad de registros en que
-    aparece cada clave de la columna 5.
-
-    Rta/
-    {'aaa': 13,
-     'bbb': 16,
-     'ccc': 23,
-     'ddd': 23,
-     'eee': 15,
-     'fff': 20,
-     'ggg': 13,
-     'hhh': 16,
-     'iii': 18,
-     'jjj': 18}}
-
-    """
+    conteo = {}
+    with open("files/input/data.csv", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            cols = linea.strip().split("\t")
+            for par in cols[4].split(","):
+                k = par.split(":")[0]
+                conteo[k] = conteo.get(k, 0) + 1
+    return dict(sorted(conteo.items()))
